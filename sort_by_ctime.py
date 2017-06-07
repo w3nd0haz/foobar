@@ -4,8 +4,8 @@ import sys
 import os
 import time
 
-MRTG_CFG_DIR = '/mydirectory'
-MRTG_CFG_FILENAME = 'interestingfile.txt'
+CFG_DIR = '/mydirectory'
+CFG_FILENAME = 'interestingfile.txt'
 DEF_LIST_LEN = 50 # number of items that must be returned
 DEF_WAIT_INTERVAL = 2 # sleep before build the dictionary
 DEF_MIN_AGE = 60 # minimum required file age
@@ -24,14 +24,14 @@ if __name__ == "__main__":
                 file_min_age = DEF_MIN_AGE
         try:
                 time.sleep(wait_interval)
-                for a in os.listdir(MRTG_CFG_DIR):
-                        if a != '.' and a != '..' and os.path.isdir(MRTG_CFG_DIR+'/'+a):
-                                for m in os.listdir(MRTG_CFG_DIR+'/'+a):
-                                        if m == MRTG_CFG_FILENAME:
-                                                f_ctime = int(os.stat(MRTG_CFG_DIR+'/'+a+'/'+m)[9])
+                for a in os.listdir(CFG_DIR):
+                        if a != '.' and a != '..' and os.path.isdir(CFG_DIR+'/'+a):
+                                for m in os.listdir(CFG_DIR+'/'+a):
+                                        if m == CFG_FILENAME:
+                                                f_ctime = int(os.stat(CFG_DIR+'/'+a+'/'+m)[9])
                                                 f_age = currentTime - f_ctime
                                                 if f_age > file_min_age:
-                                                        fileList[MRTG_CFG_DIR+'/'+a+'/'+m] = f_age
+                                                        fileList[CFG_DIR+'/'+a+'/'+m] = f_age
                                                         count = count + 1
                 fileList_sorted = sorted(fileList.items(), key=lambda x:x[1], reverse=True)
                 n = 0
